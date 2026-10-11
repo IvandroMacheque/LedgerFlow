@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: ledgerflow-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ledger_user
+      POSTGRES_PASSWORD: ledger_password
+      POSTGRES_DB: ledgerflow_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./src/infra/db/migrations/001_create_wallets_and_ledger.sql:/docker-entrypoint-initdb.d/001_create_wallets_and_ledger.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ledger_user -d ledgerflow_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

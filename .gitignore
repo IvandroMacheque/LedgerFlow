@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Environment variables (SENSITIVE)
+.env
+.env*.local
+
+# Reports & Coverage
+reports/
+.stryker-tmp/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

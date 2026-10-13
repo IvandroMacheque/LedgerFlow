@@ -9,6 +9,7 @@
   ],
   "mutate": [
     "src/domain/**/*.js",
-    "src/application/**/*.js"
+    "src/application/**/*.js",
+    "src/infra/repositories/**/*.js"
   ]
 }

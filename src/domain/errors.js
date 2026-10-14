@@ -25,3 +25,11 @@ export class DuplicateTransactionError extends Error {
 
     }
 }
+
+export class WalletNotFoundError extends Error {
+
+    constructor(message = 'Wallet not found') {
+        super(message)
+        this.name = 'WalletNotFoundError'
+    }
+}

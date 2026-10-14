@@ -1,3 +1,4 @@
+import { WalletNotFoundError } from "../domain/errors"
 import { calculateFee } from "../domain/feeCalculator"
 import { Money } from "../domain/Money"
 import { Wallet } from "../domain/Wallet"
@@ -17,7 +18,7 @@ export class ProcessPaymentUseCase {
         // buscar a carteira
         const wallet = await this.walletRepository.findById(command.walletId, command.tenantId)
 
-        if (!wallet) throw new Error('Wallet not found')
+        if (!wallet) throw new WalletNotFoundError()
 
         // calcular a taxa
         const feeCents = calculateFee(command.amountInCents)

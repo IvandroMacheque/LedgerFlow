@@ -11,6 +11,8 @@
     "src/domain/**/*.js",
     "src/application/**/*.js",
     "src/infra/repositories/**/*.js",
-    "src/presentation/**/*.js"
+    "src/presentation/**/*.js",
+    "src/infra/observability/**/*.js",
+    "src/infra/resilience/**/*.js"
   ]
 }

@@ -1,5 +1,6 @@
 import z from "zod"
 import { DuplicateTransactionError, InsufficientFundsError, WalletNotFoundError } from "../../domain/errors"
+import { logger } from "../../infra/observability/logger"
 
 export function errorHandler(err, req, res, next) {
   // Stub inicial do middleware de tratamento de erro
@@ -35,6 +36,8 @@ export function errorHandler(err, req, res, next) {
   }
 
   if (err instanceof Error) {
+    logger.error(err.message, err)
+    
     return res.status(500).json({
       error: "Ocorreu um erro interno"
     })

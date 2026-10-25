@@ -13,6 +13,7 @@
     "src/infra/repositories/**/*.js",
     "src/presentation/**/*.js",
     "src/infra/observability/**/*.js",
-    "src/infra/resilience/**/*.js"
+    "src/infra/resilience/**/*.js",
+    "src/infra/workers/**/*.js"
   ]
 }

@@ -1,3 +1,6 @@
+# Mantem o nome do projeto/volume usado antes da mudanca para server/.
+name: ledgerflow
+
 services:
   postgres:
     image: postgres:17-alpine

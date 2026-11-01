@@ -48,4 +48,4 @@ Erro normalizado: `{ status: number, message: string, fields?: { amount?: string
 
 `rtk npm test --prefix web -- tests/components.ui.jsx` é o teste focal dos componentes; `rtk npm test --prefix web` cobre também a composição. Os testes exercitam callbacks, controles passivos, semântica HTTP, loading/vazio, escape de JSON, troca de tenant e reset visual. O sufixo `.ui.jsx` mantém a suíte visual fora da descoberta padrão do Vitest do backend.
 
-Os testes do backend mantêm seu executor na raiz. Não é necessário banco ou API para testar este frontend. Configuração do build conforme [Vite](https://vite.dev/guide/) e [Tailwind CSS](https://tailwindcss.com/docs/installation/using-vite).
+Os testes do backend ficam em `server/` e executam via `rtk npm test --prefix server` a partir da raiz. Não é necessário banco ou API para testar este frontend. Configuração do build conforme [Vite](https://vite.dev/guide/) e [Tailwind CSS](https://tailwindcss.com/docs/installation/using-vite).

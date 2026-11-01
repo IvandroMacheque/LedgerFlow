@@ -29,8 +29,14 @@ Construir a camada de cliente (`web/`) num formato Monorepo, atuando como um Con
 ledgerflow/
 ├── docs/specs/
 │   └── fase-07-web-engineering-playground.md
-├── src/                             # Backend (Fases 1 a 6)
-├── tests/                           # Testes de integração e unidade do backend
+├── server/                          # Backend (Fases 1 a 6)
+│   ├── src/
+│   ├── tests/                       # Testes de integração e unidade do backend
+│   ├── exemplos-aprendizado/
+│   ├── package.json
+│   ├── vitest.config.js
+│   ├── stryker.config.json
+│   └── docker-compose.yml
 └── web/                             # Aplicação cliente (Control Plane & Chaos Playground)
     ├── package.json
     ├── vite.config.js

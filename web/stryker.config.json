@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "vitest",
+  "coverageAnalysis": "off",
+  "reporters": [
+    "html",
+    "clear-text",
+    "progress"
+  ],
+  "mutate": [
+    "src/utils/currency.js",
+    "src/state/idempotencyManager.js",
+    "src/services/apiClient.js",
+    "src/services/chaosRunner.js"
+  ]
+}
+

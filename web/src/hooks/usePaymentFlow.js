@@ -1,4 +1,6 @@
-import { INITIAL_KEY, REGENERATED_KEY, wallets } from '../mocks/playground';
+import { INITIAL_KEY, REGENERATED_KEY, wallets } from '../mocks/playground'
+import { toCents } from '../utils/currency'
+import { apiRequest } from '../services/apiClient'
 
 /** @param {{tenantId: 'tenant-alpha'|'tenant-beta'}} context */
 export function usePaymentFlow({ tenantId }) {
@@ -12,9 +14,23 @@ export function usePaymentFlow({ tenantId }) {
 /** @param {{tenantId:string,walletId:string,amount:string,operation:string,idempotencyKey:string}} payment */
 export function submitPayment(payment) {
   // TODO: [IMPLEMENTAÇÃO MANUAL] Validar/converter input e enviar pagamento.
+  const amount = toCents(payment.amount)
+  const call = apiRequest({
+    path: '/payments',
+    method: 'POST',
+    tenantId: payment.tenantId,
+    body: {
+      walletId: payment.walletId,
+      amountInCents: amount,
+      type: payment.operation,
+      idempotencyKey: payment.idempotencyKey
+    }
+  })
+  call.message = 'Mock: operação recebida pela interface. O stub não envia pagamentos nem altera o saldo.'
+
   // Preservar chave no retry, atualizar carteira e alimentar telemetria.
   // Retornar resultado normalizado; nunca simular uma aprovação em produção.
-  return { message: 'Mock: operação recebida pela interface. O stub não envia pagamentos nem altera o saldo.' };
+  return call
 }
 
 export function regeneratePaymentKey() {
@@ -23,8 +39,14 @@ export function regeneratePaymentKey() {
   return REGENERATED_KEY;
 }
 
-export function resetSandboxState() {
+export function resetSandboxState(tenantId = 'tenant-alpha' || null) {
   // TODO: [IMPLEMENTAÇÃO MANUAL] Definir endpoint/contrato de reset do sandbox
+  const res = apiRequest({
+    path: '/sandbox/reset',
+    method: 'POST',
+    tenantId: tenantId
+  })
+   res.message = 'Mock: campos visuais restaurados. Nenhum estado do servidor foi alterado.'
   // e recarregar carteira, outbox e histórico após confirmação do servidor.
-  return { message: 'Mock: campos visuais restaurados. Nenhum estado do servidor foi alterado.' };
+  return res
 }

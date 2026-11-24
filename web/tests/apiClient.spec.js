@@ -96,5 +96,63 @@ describe('Cliente HTTP de Telemetria (apiClient.js)', () => {
     expect(typeof result.durationMs).toBe('number')
     expect(typeof result.timestamp).toBe('string')
   })
+
+    it('deve suportar método POST com serialização de body, headers adicionais, AbortSignal e URL absoluta', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      headers: new Headers(),
+      json: async () => ({ success: true })
+    })
+
+    const controller = new AbortController()
+    const result = await apiRequest({
+      path: 'https://gateway.com/payments',
+      method: 'POST',
+      tenantId: 'tenant-beta',
+      body: { amount: 500 },
+      headers: { 'idempotency-key': 'idem_custom_001' },
+      signal: controller.signal
+    })
+
+    const [url, requestOptions] = vi.mocked(globalThis.fetch).mock.calls[0]
+
+    expect(url).toBe('https://gateway.com/payments')
+    expect(requestOptions.method).toBe('POST')
+    expect(requestOptions.body).toBe(JSON.stringify({ amount: 500 }))
+    expect(requestOptions.headers['idempotency-key']).toBe('idem_custom_001')
+    expect(requestOptions.signal).toBe(controller.signal)
+    expect(result.correlationId).toBe(null)
+  })
+
+  it('deve retornar data como null e usar fallback de correlationId quando a resposta não tiver cabeçalho', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      headers: new Headers(),
+      json: async () => { throw new Error('HTML não-JSON') }
+    })
+
+    const result = await apiRequest({
+      path: '/metrics',
+      tenantId: 'tenant-alpha',
+      correlationId: 'fallback-corr-777'
+    })
+
+    expect(result.data).toBe(null)
+    expect(result.correlationId).toBe('fallback-corr-777')
+  })
+
+  it('deve adotar mensagem de erro padrão quando a falha de rede não contiver message ou correlationId', async () => {
+    vi.spyOn(globalThis, 'fetch').mockRejectedValueOnce({}) // Sem message
+
+    const result = await apiRequest({
+      path: '/health',
+      tenantId: 'tenant-alpha'
+    })
+
+    expect(result.error.message).toBe('Falha de conexão com a rede')
+    expect(result.correlationId).toBe(null)
+  })
 })
 

@@ -24,21 +24,21 @@ describe('Blindagem Monetária de Borda (currency.js)', () => {
 
     it('deve rejeitar entradas inválidas, vazias, nulas ou infinitas lançando erro explícito', () => {
       // Cenário: NaN, null, undefined, "", "abc", Infinity
-      expect(() => toCents(null)).toThrow()
-      expect(() => toCents(undefined)).toThrow()
-      expect(() => toCents('')).toThrow()
-      expect(() => toCents('   ')).toThrow()
-      expect(() => toCents('abc')).toThrow()
-      expect(() => toCents(NaN)).toThrow()
-      expect(() => toCents(Infinity)).toThrow()
+      expect(() => toCents(null)).toThrow('Valor monetário inválido')
+      expect(() => toCents(undefined)).toThrow('Valor monetário inválido')
+      expect(() => toCents('')).toThrow('Valor monetário inválido')
+      expect(() => toCents('   ')).toThrow('Valor monetário inválido')
+      expect(() => toCents('abc')).toThrow('Valor monetário inválido')
+      expect(() => toCents(NaN)).toThrow('Valor monetário inválido')
+      expect(() => toCents(Infinity)).toThrow('Valor monetário inválido')
     });
 
     it('deve rejeitar valores negativos se a regra de entrada monetária exigir estritamente valores positivos', () => {
       // Cenário: -10 ou "-10.50"
-      expect(() => toCents(-10)).toThrow()
-      expect(() => toCents('-10.50')).toThrow()
-      expect(() => toCents(-0.01)).toThrow()
-      expect(() => toCents(0)).toThrow()
+      expect(() => toCents(-10)).toThrow('Valor monetário deve ser maior que zero')
+      expect(() => toCents('-10.50')).toThrow('Valor monetário deve ser maior que zero')
+      expect(() => toCents(-0.01)).toThrow('Valor monetário deve ser maior que zero')
+      expect(() => toCents(0)).toThrow('Valor monetário deve ser maior que zero')
     });
   });
 

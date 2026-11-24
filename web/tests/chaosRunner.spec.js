@@ -56,5 +56,39 @@ describe('Orquestrador de Caos e Concorrência (chaosRunner.js)', () => {
     expect(result.isBlocked).toBe(true)
     expect(result.status).toBe(404)
   })
+
+    it('deve usar count padrão igual a 5 quando a opção for omitida no burst', async () => {
+    const mockApiClient = vi.fn().mockResolvedValue({ status: 200 })
+    const runner = new ChaosRunner(mockApiClient)
+
+    const summary = await runner.runRaceConditionBurst({
+      path: '/api/v1/payments',
+      tenantId: 'tenant-alpha',
+      payload: {},
+      idempotencyKey: 'idem_default_count',
+    })
+
+    expect(summary.total).toBe(5)
+    expect(mockApiClient).toHaveBeenCalledTimes(5)
+  })
+
+  it('deve adotar tenants padrão e validar bloqueio com 403 e desbloqueio com 200', async () => {
+    const mockApiClient = vi.fn()
+      .mockResolvedValueOnce({ status: 403 })
+      .mockResolvedValueOnce({ status: 200 })
+
+    const runner = new ChaosRunner(mockApiClient)
+
+    // Caso 1: usando defaults ({}) e recebendo 403 Forbidden
+    const blockedResult = await runner.runBolaAttack({})
+    expect(blockedResult.attackerTenant).toBe('tenant-beta')
+    expect(blockedResult.victimWalletId).toBe('wallet-alpha-1')
+    expect(blockedResult.isBlocked).toBe(true)
+    expect(blockedResult.status).toBe(403)
+
+    // Caso 2: resposta 200 (não bloqueado)
+    const allowedResult = await runner.runBolaAttack({})
+    expect(allowedResult.isBlocked).toBe(false)
+  })
 })
 

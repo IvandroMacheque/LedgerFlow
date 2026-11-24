@@ -59,5 +59,27 @@ export class PostgresOutboxRepository {
   async markAsFailed(eventId, error, maxAttempts = 3, client = null) {
     // Stub inicial: incrementar attempts e atualizar status/last_error
   }
+
+  async listRecent(limit = 50) {
+    const query = `
+      SELECT id, tenant_id, event_type, payload, status, attempts, last_error, correlation_id, created_at, updated_at
+      FROM outbox_events
+      ORDER BY created_at DESC
+      LIMIT $1;
+    `;
+    const res = await this.pool.query(query, [limit]);
+    return res.rows.map((row) => ({
+      id: row.id,
+      tenantId: row.tenant_id,
+      eventType: row.event_type,
+      payload: row.payload,
+      status: row.status,
+      attempts: row.attempts,
+      lastError: row.last_error,
+      correlationId: row.correlation_id,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }));
+  }
 }
 

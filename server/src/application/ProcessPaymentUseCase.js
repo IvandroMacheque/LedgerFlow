@@ -1,7 +1,7 @@
-import { WalletNotFoundError } from "../domain/errors"
-import { calculateFee } from "../domain/feeCalculator"
-import { Money } from "../domain/Money"
-import { Wallet } from "../domain/Wallet"
+import { WalletNotFoundError } from "../domain/errors.js"
+import { calculateFee } from "../domain/feeCalculator.js"
+import { Money } from "../domain/Money.js"
+import { Wallet } from "../domain/Wallet.js"
 
 export class ProcessPaymentUseCase {
 

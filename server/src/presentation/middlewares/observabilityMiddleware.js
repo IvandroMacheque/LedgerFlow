@@ -1,6 +1,6 @@
 import crypto from 'node:crypto'
-import { runWithContext } from '../../infra/observability/context';
-import { metrics } from '../../infra/observability/metrics';
+import { runWithContext } from '../../infra/observability/context.js';
+import { metrics } from '../../infra/observability/metrics.js';
 
 export function observabilityMiddleware(req, res, next) {
   // Stub inicial do middleware de observabilidade

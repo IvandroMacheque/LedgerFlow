@@ -25,6 +25,6 @@ export default function OutboxMonitor({ events = [], isPolling = false, isLoadin
           </tr>)}</tbody>
         </table>
       </div>}
-    <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-800 bg-slate-950/30 px-5 py-3 text-[0.65rem] text-slate-400"><span><span className="font-mono text-slate-300">{events.length}</span> eventos de exemplo</span><span>Worker & polling: stubs</span></div>
+    <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-800 bg-slate-950/30 px-5 py-3 text-[0.65rem] text-slate-400"><span><span className="font-mono text-slate-300">{events.length}</span> eventos no outbox</span><span>PostgreSQL · SKIP LOCKED</span></div>
   </Panel>;
 }

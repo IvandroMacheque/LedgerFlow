@@ -1,4 +1,4 @@
-import { getContext } from "./context";
+import { getContext } from "./context.js";
 
 const SENSITIVE_KEYS = ['password', 'token', 'secret', 'authorization', 'apiKey']
 

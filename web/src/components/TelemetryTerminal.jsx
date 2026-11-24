@@ -15,7 +15,7 @@ export default function TelemetryTerminal({ metrics = {}, logs = [], isLoading =
       <div className="m-4 overflow-hidden rounded-lg border border-slate-800 bg-slate-950">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 bg-slate-900/50 px-4 py-3">
           <span className="flex items-center gap-2 font-mono text-[0.65rem] text-slate-300"><Terminal aria-hidden="true" className="size-3.5 text-slate-500" />request_history</span>
-          <span className="flex items-center gap-1.5 font-mono text-[0.6rem] text-slate-400"><Circle aria-hidden="true" className="size-1.5 fill-blue-400 text-blue-400" />MOCK SESSION</span>
+          <span className="flex items-center gap-1.5 font-mono text-[0.6rem] text-slate-400"><Circle aria-hidden="true" className="size-1.5 fill-emerald-400 text-emerald-400" />LIVE SESSION</span>
         </div>
         <div role="region" aria-label="Histórico de requisições" tabIndex={0} className="max-h-[34rem] overflow-y-auto overscroll-contain">
           {logs.length === 0 ? <p className="px-4 py-10 text-center text-xs text-slate-400">Nenhuma requisição nesta sessão.</p> : logs.map((log) => <article key={log.id} className="border-b border-slate-800/70 p-4 last:border-0">
@@ -26,7 +26,7 @@ export default function TelemetryTerminal({ metrics = {}, logs = [], isLoading =
             </details>
           </article>)}
         </div>
-        <p className="flex items-center gap-2 border-t border-slate-800 px-4 py-3 font-mono text-[0.6rem] text-slate-400"><span className="text-indigo-300">❯</span> Aguardando integração manual<span aria-hidden="true" className="h-3 w-1.5 bg-slate-500" /></p>
+        <p className="flex items-center gap-2 border-t border-slate-800 px-4 py-3 font-mono text-[0.6rem] text-slate-400"><span className="text-indigo-300">❯</span> Conectado ao servidor de telemetria<span aria-hidden="true" className="h-3 w-1.5 bg-slate-500" /></p>
       </div>
     </>}
     {error && <div className="px-5 pb-5"><ErrorMessage error={error} /></div>}

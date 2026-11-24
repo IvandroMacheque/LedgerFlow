@@ -1,4 +1,4 @@
-import { logger } from "../observability/logger"
+import { logger } from "../observability/logger.js"
 
 export async function retryWithJitter(fn, options = {}) {
   // Stub inicial mínimo para compilação

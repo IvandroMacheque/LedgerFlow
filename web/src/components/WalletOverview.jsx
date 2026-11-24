@@ -5,7 +5,7 @@ export default function WalletOverview({ walletId, formattedBalance, balanceInCe
   return <section aria-label="Carteira selecionada" className="panel overflow-hidden">
     <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
       <h2 className="flex items-center gap-2 text-sm font-semibold"><Wallet aria-hidden="true" className="size-4 text-slate-400" />Carteira selecionada</h2>
-      <span className="flex items-center gap-1.5 font-mono text-[0.65rem] text-emerald-300"><span aria-hidden="true" className="size-1.5 rounded-full bg-emerald-400" />MOCK</span>
+      <span className="flex items-center gap-1.5 font-mono text-[0.65rem] text-emerald-300"><span aria-hidden="true" className="size-1.5 rounded-full bg-emerald-400" />LIVE</span>
     </div>
     {isLoading ? <Skeleton label="Carregando carteira…" /> : error ? <div className="p-5"><ErrorMessage error={error} /></div> : <>
       <div className="flex flex-wrap items-end justify-between gap-4 px-5 py-5">

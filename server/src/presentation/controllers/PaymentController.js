@@ -1,4 +1,4 @@
-import { paymentSchema } from "../schemas/paymentSchema";
+import { paymentSchema } from "../schemas/paymentSchema.js";
 
 export class PaymentController {
   constructor(processPaymentUseCase) {

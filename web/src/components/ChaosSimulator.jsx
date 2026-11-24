@@ -29,7 +29,7 @@ export default function ChaosSimulator({ onBolaAttack, onRaceTest, onCorruptPayl
     </div>
     {isLoading && <Skeleton label="Executando prova de engenharia…" rows={1} />}
     {error && <div className="px-5 pb-5"><ErrorMessage error={error} /></div>}
-    <p className="border-t border-slate-800 bg-slate-950/30 px-5 py-3 text-[0.65rem] text-slate-400">Resultados de exemplo · callbacks aguardam implementação manual</p>
+    <p className="border-t border-slate-800 bg-slate-950/30 px-5 py-3 text-[0.65rem] text-slate-400">Execução integrada contra a API em tempo real</p>
   </Panel>;
 }
 

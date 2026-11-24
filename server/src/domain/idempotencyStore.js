@@ -1,4 +1,4 @@
-import { DuplicateTransactionError } from "./errors"
+import { DuplicateTransactionError } from "./errors.js"
 
 export class IdempotencyStore {
     

@@ -1,6 +1,6 @@
 import z from "zod"
-import { DuplicateTransactionError, InsufficientFundsError, WalletNotFoundError } from "../../domain/errors"
-import { logger } from "../../infra/observability/logger"
+import { DuplicateTransactionError, InsufficientFundsError, WalletNotFoundError } from "../../domain/errors.js"
+import { logger } from "../../infra/observability/logger.js"
 
 export function errorHandler(err, req, res, next) {
   // Stub inicial do middleware de tratamento de erro

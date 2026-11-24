@@ -1,4 +1,4 @@
-import { InsufficientFundsError } from "./errors"
+import { InsufficientFundsError } from "./errors.js"
 
 export function applyDebit(wallet, transaction) {
 

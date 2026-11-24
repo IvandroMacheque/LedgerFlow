@@ -1,5 +1,5 @@
-import { Money } from "../../domain/Money"
-import { Wallet } from "../../domain/Wallet"
+import { Money } from "../../domain/Money.js"
+import { Wallet } from "../../domain/Wallet.js"
 
 export class PostgresWalletRepository {
     
